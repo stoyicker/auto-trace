@@ -1,0 +1,31 @@
+name: assert
+
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run Super-Linter
+        uses: github/super-linter@v3
+        env:
+          FILTER_REGEX_INCLUDE: .*java|.editorconfig
+          VALIDATE_EDITORCONFIG: true
+          VALIDATE_JAVA: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  assemble:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Assemble outputs
+        run: echo "TODO assemble outputs"
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run tests
+        run: echo "TODO run tests"
