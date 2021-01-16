@@ -1,0 +1,5 @@
+Release Process
+===============
+
+ 1. ./scripts/new_release.sh
+ 2. Run the command again as per the output received
