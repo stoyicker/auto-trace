@@ -25,9 +25,15 @@ jobs:
       - name: Assemble outputs
         run: echo "TODO assemble outputs"
   test:
-    runs-on: ubuntu-20.04
+    runs-on: macos-10.15
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        run: echo "TODO run tests"
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
+          script: ./gradlew sample-java:connectedAndroidTest
