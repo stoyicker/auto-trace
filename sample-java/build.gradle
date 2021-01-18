@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.1"
+    }
+}
+
+apply plugin: "com.android.application"
+
+final def useGit = System.getenv("CI") != null && "which git".execute().waitFor() == 0
+android {
+    buildToolsVersion "30.0.3"
+    compileSdkVersion 30
+    buildTypes {
+        debug {
+            matchingFallbacks = ["release"]
+        }
+    }
+    defaultConfig {
+        applicationId "auto_trace.sample_java"
+        minSdkVersion 14
+        targetSdkVersion 30
+        versionCode useGit ? "git rev-list --count HEAD".execute().text.toInteger() : Integer.MAX_VALUE
+        versionName useGit ? "git describe --abbrev=0".execute().text.trim() : String.valueOf(versionCode)
+        resConfigs "en"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    variantFilter {
+        if (it.buildType.name == "release") {
+            it.ignore = true
+        }
+    }
+}
+
+lint.onlyIf {
+    false
+}
+
+repositories {
+    google()
+    jcenter()
+}
+
+dependencies {
+    androidTestImplementation "androidx.test:rules:1.3.0"
+    androidTestImplementation "androidx.test:runner:1.3.0"
+}
