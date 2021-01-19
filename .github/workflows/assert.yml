@@ -11,13 +11,12 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v3
         env:
-          FILTER_REGEX_INCLUDE: .*\.sh|.editorconfig|.*\.java|.*\.kotlin|.*\.gradle
+          FILTER_REGEX_INCLUDE: .*\.sh|.editorconfig|.*\.java|.*\.gradle
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_BASH: true
           VALIDATE_EDITORCONFIG: true
           VALIDATE_GROOVY: true
           VALIDATE_JAVA: true
-          VALIDATE_KOTLIN: true
   assemble_sample-java:
     runs-on: ubuntu-20.04
     steps:
