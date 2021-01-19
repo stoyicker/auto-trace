@@ -18,13 +18,20 @@ jobs:
           VALIDATE_GROOVY: true
           VALIDATE_JAVA: true
           VALIDATE_KOTLIN: true
-  assemble:
+  assemble_sample-java:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Assemble outputs
-        run: echo "TODO assemble outputs"
+        run: ./gradlew sample-java:assemble
+  assemble_sample-kotlin:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Assemble outputs
+        run: ./gradlew sample-java:assemble
   androidTest_sample-java:
     runs-on: macos-10.15
     steps:
